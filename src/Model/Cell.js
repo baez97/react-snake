@@ -16,6 +16,28 @@ export default class Cell {
     }
 
     tick() {
-        this.timer -= 1;
+        this.timer = this.timer > 0 ? this.timer-1 : 0;
     }
+
+    isEmpty() {
+        return false;
+    }
+
+    isSnake() {
+        return false;
+    }
+
+    isFood() {
+        return false;
+    }
+
+    isObstacle() {
+        return false;
+    }
+
+    isCollision() {
+        return false;
+    }
+
+    collide() { };
 }

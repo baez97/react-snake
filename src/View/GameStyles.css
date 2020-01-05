@@ -1,0 +1,66 @@
+@font-face {
+    font-family: "cookies";
+    src: local("cookies"), url("../cookies.ttf") format('truetype');
+}
+
+.pauseButton {
+    padding: 20px 25px;
+    background-color: #7fbffa;
+    color: #fff;
+    font-family: cookies;
+    border: 0;
+    border-radius: 10px;
+    font-size: 22px;
+    box-shadow: 0 5px 10px #e2e2e2;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.pauseButton:hover {
+    box-shadow: 0 5px 12px #e2e2e2;
+    background-color: #a6d4ff;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.snakeCell {
+    animation-name: bounceIn;
+    animation-duration: 0.2s;
+    background-color: #a6d4ff;
+}
+
+.emptyCell {
+    background-color: #ececec;
+}
+
+.foodCell {
+    background-color: #ed9daa;
+    animation-duration: 0.5s;
+    animation-name: bounceIn;
+}
+
+.obstacleCell {
+    background-color: #ccc
+}
+
+.collisionCell {
+    background-color: #0966bd;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
