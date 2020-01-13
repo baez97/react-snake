@@ -1,4 +1,5 @@
 import Cell from './Cell';
+import EmptyCell from './EmptyCell';
 
 export default class FoodCell extends Cell {
     constructor(timer, nutrients) {
@@ -12,5 +13,9 @@ export default class FoodCell extends Cell {
 
     collide(snake) {
         snake.eatFood(this);
+    }
+
+    nextCell(counter) {
+        return new EmptyCell();
     }
 }

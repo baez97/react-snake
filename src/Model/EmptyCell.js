@@ -13,4 +13,8 @@ export default class EmptyCell extends Cell {
     tick() {}
 
     isEmpty() { return true; }
+
+    nextCell() {
+        return new EmptyCell();
+    }
 }

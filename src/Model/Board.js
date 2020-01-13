@@ -1,4 +1,3 @@
-import Cell from "./Cell";
 import EmptyCell from "./EmptyCell";
 import SnakeCell from "./SnakeCell";
 import FoodCell from "./FoodCell";
@@ -11,6 +10,7 @@ export default class Board {
         if ( !numberOfRows )
             numberOfRows = 12;
         this.numberOfRows = numberOfRows;
+        this.gameIsOver = 
         this.tickCounter = 0;
         var cellMatrix = [];
         
@@ -26,6 +26,10 @@ export default class Board {
         this.setObstacles();
     }
     
+    isGameOver() {
+        return this.gameIsOver;
+    }
+
     setSnake() {
         this.snake = new Snake(this.numberOfRows -1, this.numberOfRows -1);
         this.moveSnakeTo = this.moveSnakeTo.bind(this);
@@ -63,41 +67,54 @@ export default class Board {
             row.forEach((cell, cIndex) => { 
                 cell.tick(); 
                 if ( cell.isTimeOver() )
-                    this.cells[rIndex][cIndex] = new EmptyCell();
+                    this.cells[rIndex][cIndex] = cell.nextCell(this.snake.length);
             });
         });
         this.snake.move(this.numberOfRows, this.moveSnakeTo);
+        if ( this.snake.length === 0 )
+            this.gameIsOver = true;
     }
 
     startMovingUp() {
-        this.snake.startMovingUp(this.numberOfRows, this.moveSnakeTo);
+        this.snake.startMovingUp();
     }
 
     startMovingDown() {
-        this.snake.startMovingDown(this.numberOfRows, this.moveSnakeTo);
+        this.snake.startMovingDown();
     }
     
     startMovingLeft() {
-        this.snake.startMovingLeft(this.numberOfRows, this.moveSnakeTo);
+        this.snake.startMovingLeft();
     }
     
     startMovingRight() {
-        this.snake.startMovingRight(this.numberOfRows, this.moveSnakeTo);
+        this.snake.startMovingRight();
     }
 
     moveSnakeTo(x, y) {
-        var objectiveCell = this.cells[y][x];
-        // if ( objectiveCell.isFood() )
-        //     this.snake.eatFood(objectiveCell);
-        var cannotMove = this.snake.collide(objectiveCell);
-        if ( cannotMove ) {
-            console.log(objectiveCell);
+        var isOutOfBounds = this.isOutOfBounds(x, y);
+        if ( isOutOfBounds ) {
             var { x, y } = this.snake.getPosition();
             this.cells[y][x] = new CollisionCell();
             return true;
         }
-        // var { x, y } = this.snake.getPosition();
+
+        var objectiveCell = this.cells[y][x];
+        var cannotMove = this.snake.collide(objectiveCell);
+        if ( cannotMove ) {
+            var { x, y } = this.snake.getPosition();
+            this.cells[y][x] = new CollisionCell();
+            return true;
+        }
+
         this.cells[y][x] = new SnakeCell(this.snake.length);
+    }
+
+    isOutOfBounds(x, y) {
+        return ( x < 0 || 
+                 y < 0 || 
+                 x >= this.numberOfRows || 
+                 y >= this.numberOfRows )
     }
 
     setFruit(x, y, counter) {
@@ -116,7 +133,6 @@ export default class Board {
         while ( !isEmpty ) {
             randomX = this.randomNumberBetween(0, this.numberOfRows);
             randomY = this.randomNumberBetween(0, this.numberOfRows);
-            console.log(this.cells[randomY][randomX]);
             isEmpty = this.cells[randomY][randomX].isEmpty()
         }
         return { x: randomX, y: randomY };

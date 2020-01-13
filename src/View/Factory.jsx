@@ -51,32 +51,4 @@ export default class Factory {
             <div className="cell collisionCell"></div>
         )
     }
-
-}
-
-const styles = {
-    cell : {
-        width: 40,
-        height: 40,
-        borderRadius: 10,
-        display: "inline-block",
-        marginLeft: 1,
-        marginRight: 1
-    },
-
-    snakeCell : {
-        backgroundColor: "#a6d4ff"
-    },
-
-    emptyCell : {
-        backgroundColor: "#e2e2e2"
-    },
-
-    foodCell : {
-        backgroundColor: "#ed9daa"
-    },
-
-    obstacleCell : {
-        backgroundColor: "#ccc"
-    }
 }

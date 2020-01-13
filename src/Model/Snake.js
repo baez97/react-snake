@@ -28,8 +28,8 @@ export default class Snake {
     }
 
     moveUp(limit, setPosition) {
-        if ( this.y <= 0 )
-            return this.hit();
+        // if ( this.y <= 0 )
+        //     return this.hit();
 
         var cannotMove = setPosition(this.x, this.y -1);
         if ( cannotMove )
@@ -38,8 +38,8 @@ export default class Snake {
         this.y--;
     }
     moveDown(limit, setPosition) {
-        if ( this.y >= limit -1 )
-            return this.hit();
+        // if ( this.y >= limit -1 )
+        //     return this.hit();
             
         var cannotMove = setPosition(this.x, this.y +1);
         if ( cannotMove )
@@ -48,8 +48,8 @@ export default class Snake {
         this.y++;
     }
     moveLeft(limit, setPosition) {
-        if ( this.x <= 0 )
-            return this.hit();
+        // if ( this.x <= 0 )
+        //     return this.hit();
 
         var cannotMove = setPosition(this.x -1, this.y);
         if ( cannotMove )
@@ -58,8 +58,8 @@ export default class Snake {
         this.x--;
     }
     moveRight(limit, setPosition) {
-        if ( this.x >= limit -1 )
-            return this.hit();
+        // if ( this.x >= limit -1 )
+        //     return this.hit();
 
         var cannotMove = setPosition(this.x +1, this.y)
         if ( cannotMove )

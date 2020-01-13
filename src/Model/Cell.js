@@ -39,5 +39,9 @@ export default class Cell {
         return false;
     }
 
+    nextCell(counter) {
+        return new Cell(counter);
+    }
+
     collide() { };
 }
